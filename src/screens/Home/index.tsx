@@ -1,10 +1,21 @@
-import { View, Text } from "react-native";
-import { Container } from "./styles";
+import { Header } from "@components/Header";
+import { NewMealButton } from "@components/NewMealButton";
+import { PercentageCard } from "@components/PercentageCard";
+
+import { Container, MealText } from "./styles";
 
 export function Home() {
     return (
         <Container>
-            <Text>Teste</Text>
+            <Header />
+
+            <PercentageCard />
+
+            <MealText>
+                Refeições
+            </MealText>
+
+            <NewMealButton />
         </Container>
     )
 }
