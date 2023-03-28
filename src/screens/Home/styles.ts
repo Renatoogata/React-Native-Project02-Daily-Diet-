@@ -7,7 +7,6 @@ export const Container = styled(SafeAreaView)`
     padding: 26px;
 `
 export const MealText = styled.Text`
-
     margin-top: 36px;
     margin-bottom: 12px;
 
@@ -15,5 +14,14 @@ ${({ theme }) => css`
     font-family: ${theme.FONT_FAMILY.REGULAR};
     font-size: ${theme.FONT_SIZE.MD}px;
 `}
+`
 
+export const Date = styled.Text`
+    margin-top: 26px;
+    margin-bottom: 5px;
+
+    ${({ theme }) => css`
+    font-family: ${theme.FONT_FAMILY.BOLD};
+    font-size: ${theme.FONT_SIZE.LG}px;
+`}
 `

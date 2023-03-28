@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components/native";
-import { ArrowUpRight } from 'phosphor-react-native'
+import { ArrowLeft } from 'phosphor-react-native'
 
 export type CardTypeStyleProps = 'PRIMARY' | 'SECONDARY'
 
@@ -8,13 +8,20 @@ type Props = {
 }
 
 export const Container = styled.View<Props>`
-    margin-top: 30px;
     
+    margin-left: -30px;
+    margin-right: -30px;
+    margin-top: -60px;
+
+    padding-top: 80px;
+    padding-bottom: 30px;
+
     justify-content: center;
     align-items: center;
     border-radius: 6px;
-    padding: 22px;
     
+    
+    background-size: auto 1em;
     background-color: ${({ theme, type }) => type === 'PRIMARY' ? theme.COLORS.GREEN_100 : theme.COLORS.RED_100};
 
 `
@@ -36,11 +43,11 @@ export const Text = styled.Text`
 
 export const ArrowButton = styled.TouchableOpacity`
     position: absolute;
-    right: 8px;
-    top: 8px;
+    left: 32px;
+    top: 50px;
 `
 
-export const ArrowUp = styled(ArrowUpRight).attrs<Props>(({ theme, type }) => ({
+export const ArrowUp = styled(ArrowLeft).attrs<Props>(({ theme, type }) => ({
     size: 22,
     color: type === 'PRIMARY' ? theme.COLORS.GREEN_500 : theme.COLORS.RED_500
 })) <Props>``

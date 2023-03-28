@@ -4,8 +4,9 @@ import { ThemeProvider } from 'styled-components/native';
 import { useFonts, NunitoSans_400Regular, NunitoSans_700Bold } from '@expo-google-fonts/nunito-sans';
 
 import theme from './src/theme'
-import { Home } from '@screens/Home';
 import { Loading } from '@components/Loading';
+
+import { Routes } from './src/routes';
 
 export default function App() {
   const [fonstLoaded] = useFonts({ NunitoSans_400Regular, NunitoSans_700Bold });
@@ -18,7 +19,7 @@ export default function App() {
         translucent
       />
 
-      {fonstLoaded ? <Home /> : <Loading />}
+      {fonstLoaded ? <Routes /> : <Loading />}
     </ThemeProvider>
   );
 }
