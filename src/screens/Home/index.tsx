@@ -1,6 +1,6 @@
+import { ButtonIcon } from "@components/ButtonIcon";
 import { Header } from "@components/Header";
 import { MealCard } from "@components/MealCard";
-import { NewMealButton } from "@components/NewMealButton";
 import { PercentageCard } from "@components/PercentageCard";
 
 import { Container, Date, MealText } from "./styles";
@@ -16,7 +16,12 @@ export function Home() {
                 Refeições
             </MealText>
 
-            <NewMealButton />
+            <ButtonIcon
+                title="Nova Refeição"
+                icon="add"
+                type="PRIMARY"
+
+            />
 
             <Date>
                 12.08.22

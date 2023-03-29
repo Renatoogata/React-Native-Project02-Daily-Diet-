@@ -1,27 +1,17 @@
-import { Container, Text, Circle } from "./styles";
-import { ColorTypeStyleProps } from "./styles";
 import { TouchableOpacityProps } from "react-native";
+import { Container, Text } from "./styles";
 
 type Props = TouchableOpacityProps & {
-    type?: ColorTypeStyleProps;
-    focus: boolean
-    name: string
-}
+    title: string
+};
 
-export function Button({ name, type = 'PRIMARY', focus = false, ...rest }: Props) {
+export function Button({ title, ...rest }: Props) {
     return (
-        <Container
-            type={type}
-            focus={focus}
-            {...rest}
-        >
-            <Circle
-                type={type}
-                focus={focus}
-            />
+        <Container{...rest}>
+
 
             <Text>
-                {name}
+                {title}
             </Text>
         </Container>
     )

@@ -1,6 +1,12 @@
 import styled, { css } from "styled-components/native";
-import { Plus } from 'phosphor-react-native'
+import { MaterialIcons } from '@expo/vector-icons'
 import { TouchableOpacity } from "react-native";
+
+export type ButtonIconTypeStyleProps = 'PRIMARY' | 'SECONDARY';
+
+type Props = {
+    type: ButtonIconTypeStyleProps
+}
 
 export const Container = styled(TouchableOpacity)`
     
@@ -15,14 +21,7 @@ export const Container = styled(TouchableOpacity)`
 
 `
 
-export const PlusIcon = styled(Plus).attrs(({ theme }) => ({
-    size: 20,
-    color: theme.COLORS.WHITE
-}))`
-    margin-right: 8px;
-`
-
-export const Text = styled.Text`
+export const Title = styled.Text`
     ${({ theme }) => css`
         color: ${theme.COLORS.WHITE};
         font-family: ${theme.FONT_FAMILY.BOLD};
@@ -30,5 +29,12 @@ export const Text = styled.Text`
     `}
 `
 
+
+export const Icon = styled(MaterialIcons).attrs<Props>(({ theme, type }) => ({
+    size: 22,
+    color: type === 'PRIMARY' ? theme.COLORS.WHITE : theme.COLORS.GRAY_700
+}))`
+    margin-right: 8px;
+`;
 
 

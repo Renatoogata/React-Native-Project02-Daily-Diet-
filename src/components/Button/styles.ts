@@ -1,55 +1,34 @@
 import styled, { css } from "styled-components/native";
+import { Plus } from 'phosphor-react-native'
 import { TouchableOpacity } from "react-native";
 
-export type ColorTypeStyleProps = 'PRIMARY' | 'SECONDARY'
-
-type Props = {
-    type: ColorTypeStyleProps
-    focus: boolean
-}
-
-
-export const Container = styled(TouchableOpacity) <Props>`
-    flex: 1;
-
+export const Container = styled(TouchableOpacity)`
+    
+    width: 100%;
     flex-direction: row;
-    align-items: baseline;
+    align-items: center;
     justify-content: center;
-
-    height: 50px;
-    max-height: 50px;
-    padding: 16px;
+    padding: 20px;
     border-radius: 6px;
-    margin: 0 5px;
-    
-    border: 1px;
+       
+    background-color: ${({ theme }) => theme.COLORS.GRAY_600};
 
-    ${({ theme, type, focus }) => css`
-        background-color: ${type === "PRIMARY" && focus === true ? theme.COLORS.GREEN_100 :
-            type === "SECONDARY" && focus === false ? theme.COLORS.RED_100 :
-                theme.COLORS.WHITE
-        };
-        border-color: ${type === "PRIMARY" && focus === true ? theme.COLORS.GREEN_500 :
-            type === "SECONDARY" && focus === false ? theme.COLORS.RED_500 :
-                theme.COLORS.WHITE
-        };
-    `}
-    
-    
 `
 
-export const Circle = styled.View<Props>`
-    background-color: ${({ theme, type }) => (type === 'PRIMARY' ? theme.COLORS.GREEN_500 : theme.COLORS.RED_300)};
-    width: 8px;
-    height: 8px;
-    border-radius: 8px;
-
-    margin-right: 5px;
+export const PlusIcon = styled(Plus).attrs(({ theme }) => ({
+    size: 20,
+    color: theme.COLORS.WHITE
+}))`
+    margin-right: 8px;
 `
 
 export const Text = styled.Text`
     ${({ theme }) => css`
-        font-size: ${theme.FONT_SIZE.SM}px;
+        color: ${theme.COLORS.WHITE};
         font-family: ${theme.FONT_FAMILY.BOLD};
+        font-size: ${theme.FONT_SIZE.MD}px;
     `}
 `
+
+
+

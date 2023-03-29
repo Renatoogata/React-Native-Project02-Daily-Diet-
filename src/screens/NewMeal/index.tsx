@@ -1,10 +1,9 @@
-import { Button } from "@components/Button";
-import { Header2 } from "@components/Header2";
+import { CheckButton } from "@components/CheckButton";
+import { HeaderBackButton } from "@components/HeaderBackButton";
 import { Input } from "@components/Input";
-import { NewMealButton } from "@components/NewMealButton";
 import { useState } from "react";
 import { Container, DateHourContainer, Text } from "./styles";
-
+import { Button } from "@components/Button";
 
 export function NewMeal() {
     const [button, setButton] = useState(true)
@@ -21,7 +20,7 @@ export function NewMeal() {
 
     return (
         <Container>
-            <Header2
+            <HeaderBackButton
                 text="Nova Refeição"
             />
 
@@ -72,13 +71,13 @@ export function NewMeal() {
             <Text>Está dentro da dieta?</Text>
 
             <DateHourContainer>
-                <Button
+                <CheckButton
                     name="Sim"
                     type="PRIMARY"
                     focus={button}
                     onPress={handleSwitchButton}
                 />
-                <Button
+                <CheckButton
                     name="Não"
                     type="SECONDARY"
                     focus={button}
@@ -86,15 +85,18 @@ export function NewMeal() {
                 />
             </DateHourContainer>
 
-            <NewMealButton
+            <Button
                 style={
                     {
-                        marginTop: 120
+                        marginTop: 'auto'
                     }
                 }
 
-                name="penes"
-            />
+                title="Cadastrar Refeição"
+            >
+            </Button>
+
+
 
 
         </Container>

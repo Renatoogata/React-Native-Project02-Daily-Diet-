@@ -4,9 +4,11 @@ type Props = {
     text: string;
 }
 
-export function Header2({ text }: Props) {
+export function HeaderBackButton({ text }: Props) {
     return (
-        <Container>
+        <Container
+            type="PRIMARY"
+        >
 
             <BackIconButton>
                 <BackIcon />
