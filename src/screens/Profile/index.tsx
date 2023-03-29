@@ -1,11 +1,11 @@
-import { Body, Box, Container, Footer, NumberBold, Text, TextTitle } from "./styles";
+import { Body, Container, Footer, NumberBold, Text, TextTitle } from "./styles";
 import { ProfilePercentageCard } from "@components/ProfilePercentageCard";
+import { BoxMealDone } from "@components/BoxMealDone";
 
 export function ProfileStatistics() {
-
     return (
         <Container>
-            <ProfilePercentageCard />
+            <ProfilePercentageCard type="PRIMARY" />
 
             <Body>
                 <TextTitle>
@@ -31,23 +31,8 @@ export function ProfileStatistics() {
 
 
             <Footer>
-                <Box>
-                    <NumberBold>
-                        99
-                    </NumberBold>
-                    <Text>
-                        refeições dentro da dieta
-                    </Text>
-                </Box>
-
-                <Box>
-                    <NumberBold>
-                        99
-                    </NumberBold>
-                    <Text>
-                        refeições fora da dieta
-                    </Text>
-                </Box>
+                <BoxMealDone text="dentro" type="PRIMARY" number={10} />
+                <BoxMealDone text="fora" type="SECONDARY" number={20} />
             </Footer>
         </Container>
     )

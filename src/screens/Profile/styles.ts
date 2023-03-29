@@ -44,14 +44,3 @@ export const Footer = styled.View`
     align-items: center;
     justify-content: center;
 `
-
-export const Box = styled.View`
-    margin: 30px 10px 0px 10px;
-    padding: 20px 20px 10px 20px;
-    width: 150px;
-    background-color: ${({ theme }) => theme.COLORS.GREEN_100};
-    align-items: center;
-    
-    border-radius: 4px;
-`
-
