@@ -1,16 +1,27 @@
-import { BackIcon, BackIconButton, Container, Text } from "./styles";
+import { useNavigation } from "@react-navigation/native";
+import { BackIcon, BackIconButton, ColorTypeStyleProps, Container, Text } from "./styles";
 
 type Props = {
     text: string;
+    type: ColorTypeStyleProps
 }
 
-export function HeaderBackButton({ text }: Props) {
+export function HeaderBackButton({ text, type = 'PRIMARY' }: Props) {
+
+    const navigation = useNavigation()
+
+    function handleBackOnePage() {
+        navigation.goBack()
+    }
+
     return (
         <Container
-            type="PRIMARY"
+            type={type}
         >
 
-            <BackIconButton>
+            <BackIconButton
+                onPress={handleBackOnePage}
+            >
                 <BackIcon />
             </BackIconButton>
 

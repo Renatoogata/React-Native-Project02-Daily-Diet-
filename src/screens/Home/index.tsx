@@ -1,16 +1,75 @@
-import { ButtonIcon } from "@components/ButtonIcon";
-import { Header } from "@components/Header";
-import { MealCard } from "@components/MealCard";
-import { PercentageCard } from "@components/PercentageCard";
-
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { Container, Date, MealText } from "./styles";
 
+import { PercentageCard } from "@components/PercentageCard";
+import { MealCard } from "@components/MealCard";
+import { Header } from "@components/Header";
+import { ButtonIcon } from "@components/ButtonIcon";
+import { useCallback, useState } from "react";
+import { MealStorageDTO } from "@storage/meal/MealStorageDTO";
+import { Loading } from "@components/Loading";
+import { Alert, FlatList } from "react-native";
+import { mealsGetAll } from "@storage/meal/mealsGetAll";
+
 export function Home() {
+    const [isLoading, setIsLoading] = useState(true);
+
+    const [meals, setMeals] = useState<MealStorageDTO[]>([])
+    const [goodMealcount, setGoodMealCount] = useState(0)
+
+    const navigation = useNavigation()
+
+    function handleCreateMeal() {
+        navigation.navigate('meal')
+    }
+
+    async function fetchMeals() {
+        try {
+            setIsLoading(true)
+
+            const data = await mealsGetAll()
+
+            setMeals(data);
+
+        } catch (error) {
+            console.log(error)
+            Alert.alert('Reifeições', 'Não foi possível carregar as refeições')
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
+    function getPercentage() {
+        var x = 0;
+
+        var y = 0;
+        meals.forEach(result => {
+            if (result.onDiet) {
+                x++
+            }
+        })
+
+        y = (x / meals.length) * 100
+
+        const result = y.toFixed(2)
+
+        return result
+    }
+
+
+    useFocusEffect(useCallback(() => {
+        fetchMeals()
+    }, []))
+
     return (
         <Container>
-            <Header />
+            <Header
 
-            <PercentageCard />
+            />
+
+            <PercentageCard
+                getPercentage={getPercentage}
+            />
 
             <MealText>
                 Refeições
@@ -20,24 +79,31 @@ export function Home() {
                 title="Nova Refeição"
                 icon="add"
                 type="PRIMARY"
-
+                onPress={handleCreateMeal}
             />
 
-            <Date>
-                12.08.22
-            </Date>
 
-            <MealCard title="Xburger" time="20:00" type="SECONDARY" />
-            <MealCard title="Arroz com ovo e frango frito" time="10:00" type="PRIMARY" />
-            <MealCard title="Pao com manteiga" time="22:00" type="PRIMARY" />
-            <MealCard title="Bolo do chocolate recheado" time="08:00" type="SECONDARY" />
+            {
+                isLoading ? <Loading /> :
+                    <>
+                        <Date>
+                            20.03.23
+                        </Date>
 
-            <Date>
-                12.08.22
-            </Date>
-
-            <MealCard title="Arroz com ovo" time="12:00" type="PRIMARY" />
-            <MealCard title="Beringela frita" time="15:30" type="PRIMARY" />
+                        <FlatList
+                            data={meals}
+                            keyExtractor={meals => meals.id}
+                            renderItem={({ item }) => (
+                                <MealCard
+                                    title={item.name}
+                                    time={item.time}
+                                    typeBoolean={item.onDiet}
+                                    type='PRIMARY'
+                                />
+                            )}
+                        />
+                    </>
+            }
         </Container>
     )
 }

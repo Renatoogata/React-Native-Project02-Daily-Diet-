@@ -6,9 +6,17 @@ type Props = {
     type?: ColorTypeStyleProps
     title: string
     time: string
+    typeBoolean: boolean
 }
 
-export function MealCard({ type = 'PRIMARY', title, time }: Props) {
+export function MealCard({ typeBoolean, title, time, type }: Props) {
+    if (typeBoolean) {
+        type = "PRIMARY"
+    } else {
+        type = "SECONDARY"
+    }
+
+
     return (
         <Container>
             <Time>

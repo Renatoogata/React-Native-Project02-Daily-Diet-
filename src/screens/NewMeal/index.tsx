@@ -4,31 +4,63 @@ import { Input } from "@components/Input";
 import { useState } from "react";
 import { Container, DateHourContainer, Text } from "./styles";
 import { Button } from "@components/Button";
+import { mealCreate } from "@storage/meal/mealCreate";
+import { Alert } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+
+const initialValue = {
+    name: '',
+    description: '',
+    date: '',
+    time: '',
+    onDiet: true,
+}
 
 export function NewMeal() {
     const [button, setButton] = useState(true)
 
-    function handleSwitchButton() {
-        if (button === false) {
-            setButton(true)
-        }
+    const [mealObj, setMealObj] = useState(initialValue)
 
-        if (button === true) {
-            setButton(false)
+    function handleSwitchButtonTrue() {
+        setButton(true)
+        setMealObj({ ...mealObj, onDiet: true })
+    }
+
+    function handleSwitchButtonFalse() {
+        setButton(false)
+        setMealObj({ ...mealObj, onDiet: false })
+    }
+
+    const navigation = useNavigation();
+
+    async function handleAddNewMeal() {
+        try {
+            if (mealObj.name === '' || mealObj.description === "" || mealObj.date === "" || mealObj.time === "") {
+                return Alert.alert('Nova Reifição', 'Porfavor Digite os dados corretamente')
+            }
+
+            await mealCreate(mealObj)
+
+            navigation.goBack()
+        } catch (error) {
+            console.log(error)
+            Alert.alert("Adicionar Refeição", "Não foi possível adicionar refeição")
         }
     }
+
 
     return (
         <Container>
             <HeaderBackButton
                 text="Nova Refeição"
+                type="PRIMARY"
             />
 
             <Text>
                 Nome
             </Text>
             <Input
-
+                onChangeText={text => setMealObj({ ...mealObj, name: text })}
             />
 
             <Text>
@@ -39,6 +71,7 @@ export function NewMeal() {
                 numberOfLines={5}
                 maxLength={240}
                 multiline
+                onChangeText={text => setMealObj({ ...mealObj, description: text })}
             />
 
             <DateHourContainer>
@@ -59,12 +92,14 @@ export function NewMeal() {
                         marginRight: 20
                     }}
                     placeholder="dd/mm/yyyy"
+                    onChangeText={text => setMealObj({ ...mealObj, date: text })}
                 />
                 <Input
                     style={{
                         flex: 1
                     }}
                     placeholder="hh:mm"
+                    onChangeText={text => setMealObj({ ...mealObj, time: text })}
                 />
             </DateHourContainer>
 
@@ -75,24 +110,25 @@ export function NewMeal() {
                     name="Sim"
                     type="PRIMARY"
                     focus={button}
-                    onPress={handleSwitchButton}
+                    onPress={handleSwitchButtonTrue}
                 />
                 <CheckButton
                     name="Não"
                     type="SECONDARY"
                     focus={button}
-                    onPress={handleSwitchButton}
+                    onPress={handleSwitchButtonFalse}
                 />
             </DateHourContainer>
 
             <Button
                 style={
                     {
-                        marginTop: 'auto'
+                        marginTop: 120
                     }
                 }
 
                 title="Cadastrar Refeição"
+                onPress={handleAddNewMeal}
             >
             </Button>
 

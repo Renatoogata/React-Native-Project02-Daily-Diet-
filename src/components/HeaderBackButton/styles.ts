@@ -13,9 +13,9 @@ export const Container = styled.View<Props>`
     justify-content: center;
     
     background-color: ${({ theme, type }) =>
-        (type === 'PRIMARY' && theme.COLORS.GRAY_200) ||
-        (type === 'SECONDARY' && theme.COLORS.GREEN_100) ||
-        (type === 'THIRDARY' && theme.COLORS.RED_100)
+        (type === 'PRIMARY' && theme.COLORS.GREEN_100) ||
+        (type === 'SECONDARY' && theme.COLORS.RED_100) ||
+        (type === 'THIRDARY' && theme.COLORS.GRAY_200)
     };
     
     margin: -80px -32px 30px -32px;

@@ -11,6 +11,8 @@ export const Container = styled(SafeAreaView)`
     flex: 1;
     padding: 120px 26px;
     align-items: center;
+
+    background-color: ${({ theme }) => theme.COLORS.WHITE};
 `
 
 export const Title = styled.Text<Props>`

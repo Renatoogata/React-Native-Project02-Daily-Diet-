@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { ArrowButton, ArrowUp, CardTypeStyleProps, Container, Number, Text } from "./styles";
 
 type Props = {
@@ -5,11 +6,20 @@ type Props = {
 }
 
 export function ProfilePercentageCard({ type = "PRIMARY" }: Props) {
+
+    const navigation = useNavigation()
+
+    function handleCreateMeal() {
+        navigation.navigate('home')
+    }
+
     return (
         <Container
             type={type}
         >
-            <ArrowButton>
+            <ArrowButton
+                onPress={handleCreateMeal}
+            >
                 <ArrowUp
                     type={type}
                 />

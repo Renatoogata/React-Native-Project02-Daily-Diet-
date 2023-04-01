@@ -8,7 +8,9 @@ type Props = {
     type: TitleTypeStyleProps
 }
 
-export function Feedback({ type = 'SECONDARY' }: Props) {
+export function Feedback() {
+    const type = 'PRIMARY';
+
     return (
         <Container>
             {type === 'PRIMARY' ?
